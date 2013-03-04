@@ -18,7 +18,7 @@ public class XStreamer_FImage extends XStreamer<FImage> {
     public XStreamer_FImage() {
         this.alias("FImage", FImage.class);
     }
-    
+
     @Override
     protected void make(FImage e) {
         try {
@@ -27,5 +27,5 @@ public class XStreamer_FImage extends XStreamer<FImage> {
             Logger.getLogger(XStreamer_FImage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

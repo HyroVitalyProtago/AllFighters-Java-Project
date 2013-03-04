@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -82,6 +83,10 @@ public class Fighter extends FObject implements Serializable {
     @Override
     public void addSprite(FSprite sprite) {
         throw new UnsupportedOperationException();
+    }
+
+    public Collection<FSprite[]> getSprites() {
+        return this.map.values();
     }
 
     public Fighter_State getEnchainement() {
@@ -190,7 +195,7 @@ public class Fighter extends FObject implements Serializable {
             return false;
         if (this.x > ennemi.x && this.dir == Direction.RIGHT)
             return false;
-        
+
         return spr.fight(ennemi, spr1);
 
     }
@@ -260,7 +265,7 @@ public class Fighter extends FObject implements Serializable {
     public void recevoirDegats(int degats) {
         if ((degats - resistance) > 0) {
             this.life -= (degats - resistance);
-            //if (this.isOnGround()) {            
+            //if (this.isOnGround()) {
             this.state = Fighter_State.hit;
             //}
         }
