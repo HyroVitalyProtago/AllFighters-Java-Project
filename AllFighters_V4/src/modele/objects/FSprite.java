@@ -48,7 +48,7 @@ public class FSprite extends Rectangle implements Serializable {
         return subImages;
     }
     public void addSubImage(FImage img) {
-        // Exception en fonction de la taille de l'image        
+        // Exception en fonction de la taille de l'image
         this.subImages.add(img);
         updateSize();
     }
@@ -57,7 +57,7 @@ public class FSprite extends Rectangle implements Serializable {
         this.time = 0;
         this.nbFoisJoue = 0;
     }
-    
+
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -102,16 +102,16 @@ public class FSprite extends Rectangle implements Serializable {
         //System.out.println(i);
         return this.subImages.get(i);
     }
-    
+
     private void updateSize() {
         //System.out.println("SPRITE: UPDATE SIZE ");
-        
+
         //this.x = minX();
         this.width = width();
         //this.y = minY();
         this.height = height();
     }
-    
+
     private int minX() {
         int minX = this.subImages.get(0).x;
         for (FImage img : subImages) {
@@ -152,7 +152,7 @@ public class FSprite extends Rectangle implements Serializable {
         //System.out.println((this.x + x[0] + x[1]) + " - " + minX());
         return (this.y + y[0] + y[1]) - minY();
     }
-    
+
     public int getNbFoisJoue() {
         return nbFoisJoue;
     }
@@ -166,16 +166,16 @@ public class FSprite extends Rectangle implements Serializable {
     public void setY(int y) {
         this.y = y;
     }
-    
-    public boolean fight(Fighter f,FSprite ennemi) {        
+
+    public boolean fight(Fighter f,FSprite ennemi) {
         FImage img = this.getCurrentImg().clone();
         FImage img1 = ennemi.getCurrentImg().clone();
-        
+
         img.x = this.x + img.x;
         //img.y = this.y + img.y;
         img1.x = ennemi.x + img1.x;
         //img1.y = ennemi.y + img1.y;
-        
+
         if (img.intersects(img1)) {
             //System.out.println("SPRITE : intersects = "+img.intersects(img1));
             //System.out.println((int) ((double) this.time / (double) 100));
@@ -183,10 +183,10 @@ public class FSprite extends Rectangle implements Serializable {
         } else {
             //System.out.println("Sprite : IMG = "+(int) ((double) this.time / (double) 100));
         }
-        
+
         return false;
     }
-    
+
     public void remakeAllSubImages() {
         for (FImage image : subImages) {
             try {
@@ -196,7 +196,7 @@ public class FSprite extends Rectangle implements Serializable {
             }
         }
     }
-    
+
     @Override
     public FSprite clone() {
         FSprite spr = new FSprite(this.name, this.getLocation(), this.getSize(), speed);
@@ -210,27 +210,27 @@ public class FSprite extends Rectangle implements Serializable {
         spr.ok = this.ok;
         return spr;
     }
-    
+
     // DRAW
     public void drawContour(Graphics g) {
         g.setColor(Color.YELLOW);
         g.drawRect(0, 0, width, height);
     }
-    public void draw(FObject obj, Graphics g) {        
-        
+    public void draw(FObject obj, Graphics g) {
+
         //int x = this.x - (this.width/3); // FOR DRAWING
         int y = (int)obj.height - this.y - this.height;
-        
+
         g.translate(x, y);
-        
-        if (AllFighters.SHOW_BOXS_FIGHTER) {            
+
+        if (AllFighters.SHOW_BOXS_FIGHTER) {
             drawContour(g);
             //drawContourMax(g);
         }
-        
+
         getCurrentImg().draw(this, g);
         g.translate(-x, -y);
-        
+
         //translate(x, 0);
 
         int taille = this.subImages.size();
@@ -239,7 +239,7 @@ public class FSprite extends Rectangle implements Serializable {
             this.time += this.speed;
         }
 
-        // BEGIN GESTION DE NBFOIS JOUE        
+        // BEGIN GESTION DE NBFOIS JOUE
         if ((int) ((double) this.time / (double) 100) == taille && !ok) { //increment nbFoisJoue quand dernier sprite
             ok = true;
             nbFoisJoue++;
@@ -252,10 +252,15 @@ public class FSprite extends Rectangle implements Serializable {
             ok = false;
         }
         // END
-        
+
         this.time = this.time % (taille * 100);
 
         //translate(-x, 0);
 
     }
+
+    public String getName() {
+        return name;
+    }
+    
 }

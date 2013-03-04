@@ -29,9 +29,9 @@ import modele.objects.FSprite;
  */
 public class Fighter extends FObject implements Serializable {
 
-    private static final int SPEED = 3;
+    private int SPEED = 3;
     //
-    private static final int JUMP_FORCE = 6;
+    private int JUMP_FORCE = 6;
     private boolean onGround;
     //COMMANDE
     //private FighterController fighterController;
@@ -270,6 +270,26 @@ public class Fighter extends FObject implements Serializable {
             //}
         }
     }
+
+    //
+
+    public int getForce() {
+        return force;
+    }
+
+    public int getJUMP_FORCE() {
+        return JUMP_FORCE;
+    }
+
+    public int getResistance() {
+        return resistance;
+    }
+
+    public int getSPEED() {
+        return SPEED;
+    }
+
+
     // SYSTEM MAKE FIGHTER
     public static final int SPEED_SPRITE = 10;
 

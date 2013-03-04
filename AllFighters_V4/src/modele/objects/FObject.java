@@ -38,7 +38,7 @@ public class FObject implements Serializable {
     protected double y;
     protected double width;
     protected double height;
-    
+
     public FObject(String name, ArrayList<FSprite> sprites, boolean visible, boolean solid) {
         //super(0, 0, 0, 0);
         this.name = name;
@@ -75,7 +75,7 @@ public class FObject implements Serializable {
             sprite.remakeAllSubImages();
         }
     }
-    
+
     public void addSprite(FSprite sprite) {
         this.sprites.add(sprite);
         //updateSize();
@@ -108,12 +108,12 @@ public class FObject implements Serializable {
             sprite.resetTime();
         }
     }
-    
+
     public void setCurrentSprite(int currentSprite) {
-        if (currentSprite != this.currentSprite) {            
+        if (currentSprite != this.currentSprite) {
             getCurrentSprite().resetTime();
             this.currentSprite = currentSprite;
-        }        
+        }
         //updateSize();
 
     }
@@ -129,7 +129,7 @@ public class FObject implements Serializable {
     public int getNumCurrentSprite() {
         return this.currentSprite;
     }
-    
+
     public double getX() {
         return x;
     }
@@ -149,11 +149,11 @@ public class FObject implements Serializable {
         this.x = x;
         this.y = y;
     }
-    
+
     public Point getLocation() {
         return new Point((int)x, (int)y);
     }
-    
+
     public void setVelocityX(double dx) {
         this.dx = dx;
     }
@@ -177,7 +177,7 @@ public class FObject implements Serializable {
         this.width = width;
         this.height = height;
     }
-    
+
     public boolean collide(FObject obj) {
         Rectangle r1 = this.getBounds();
         Rectangle r2 = obj.getBounds();
@@ -220,16 +220,22 @@ public class FObject implements Serializable {
         int y = room.getHeight() - (int)this.y - (int)this.height;
 
         g.translate((int)this.x, y);
-        
+
         if (AllFighters.SHOW_BOXS) {
             drawContour(g);
         }
-        
+
         if (isVisible()) {
             this.getCurrentSprite().draw(this, g);
-        } 
-        
+        }
+
         g.translate((int)-this.x, -y);
-        
+
     }
+
+    public String getName() {
+        return name;
+    }
+
+    
 }
