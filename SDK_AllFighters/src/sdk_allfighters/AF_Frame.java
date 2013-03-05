@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import modele.fighters.Fighter;
 import modele.objects.Box;
 import modele.objects.Box_Type;
 import modele.objects.FImage;
@@ -27,6 +28,8 @@ import modele.objects.FImage;
 public class AF_Frame extends JFrame {
 
     private FImage image;
+    //
+    private Fighter fighter;
     //
     private AF_MenuBar menuBar;
     private AF_Panel panel;
@@ -57,7 +60,8 @@ public class AF_Frame extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent ke) {
-                //throw new UnsupportedOperationException("Not supported yet.");
+                throw new UnsupportedOperationException("Not supported yet.");
+                /*
                 if (AF_Frame.this.getImage() != null) {
                     if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
                         num++;
@@ -69,8 +73,7 @@ public class AF_Frame extends JFrame {
                         update();
                     }
                 }
-
-
+                */
             }
 
             @Override
@@ -81,6 +84,7 @@ public class AF_Frame extends JFrame {
     }
 
     public void update() {
+        /*
         //SerializerImg si = new SerializerImg();
         FImage image = null;
         //image = (FImage) new XStreamer_FImage().load(location + num);//si.recup(location + num);
@@ -100,17 +104,20 @@ public class AF_Frame extends JFrame {
         }
 
         //System.out.println(image);
-
+        */
     }
+
+    private AF_PanelCaracteristiques caracteristiques;
+    private AF_PanelListOfSprites listOfSprite;
 
     public void construire() {
         this.menuBar = new AF_MenuBar(this);
 
         JPanel mainPanel = new JPanel(new GridLayout(1, 2));
 
-        JPanel caracteristiques = new AF_PanelCaracteristiques();
+        caracteristiques = new AF_PanelCaracteristiques(this);
 
-        JPanel listOfSprite = new AF_PanelListOfSprites();
+        listOfSprite = new AF_PanelListOfSprites(this);
 
         JPanel container = new JPanel(new GridLayout(2, 1));
         container.add(caracteristiques);
@@ -197,6 +204,19 @@ public class AF_Frame extends JFrame {
         this.add(mainPanel);
     }
 
+    public void setFighter(Fighter fighter) {
+        this.fighter = fighter;
+        caracteristiques.refresh();
+        listOfSprite.refresh();
+    }
+
+    public Fighter getFighter() {
+        return fighter;
+    }
+
+    // ******************************** ANCIENNE VERSION ********************************
+
+    /*
     public void setImage(FImage image) {
         this.image = image;
         this.enregistrable = false;
@@ -237,4 +257,6 @@ public class AF_Frame extends JFrame {
 
         return this.enregistrable;
     }
+    *
+    */
 }

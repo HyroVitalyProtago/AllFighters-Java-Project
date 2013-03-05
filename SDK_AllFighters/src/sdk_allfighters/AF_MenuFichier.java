@@ -4,13 +4,16 @@
  */
 package sdk_allfighters;
 
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
+import java.text.Format;
+import javax.swing.*;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.border.EmptyBorder;
+import modele.fighters.Fighter;
 
 /**
  *
@@ -37,7 +40,30 @@ public class AF_MenuFichier extends JMenu {
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    throw new UnsupportedOperationException("Not supported yet.");
+                    //throw new UnsupportedOperationException("Not supported yet.");
+
+                    System.out.println("Nouveau Fighter");
+
+                    /*
+                     * JDialog dialog = new JDialog(AF_MenuFichier.this.frame,
+                     * "Nouveau Fighter", true); dialog.add(new JLabel("Saisir
+                     * le nom du Fighter : ")); JTextField jtf = new
+                     * JTextField(); dialog.add(jtf); dialog.setVisible(true);
+                     */
+
+                    //Custom button text
+                    /*
+                     * Object[] options = {"OK", "Annuler"}; int n =
+                     * JOptionPane.showOptionDialog(frame, "Saisir le nom du
+                     * Fighter : ", "Nouveau Fighter",
+                     * JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                     * null, options, options[0]);
+                     *
+                     */
+                    //AF_MenuFichier.this.frame.setFighter(new Fighter());
+
+                    JDialog dialog = new DialogNouveauFighter();
+
                 }
             });
         }
@@ -99,6 +125,64 @@ public class AF_MenuFichier extends JMenu {
                     throw new UnsupportedOperationException("Not supported yet.");
                 }
             });
+        }
+    }
+
+    class DialogNouveauFighter extends JDialog {
+
+        private JTextField jtf;
+
+        public DialogNouveauFighter() {
+
+            JPanel mainPanel = new JPanel(new GridLayout(3,1));
+            mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+            this.setTitle("Nouveau Fighter");
+            this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            this.setResizable(false);
+            this.setModal(true);
+
+            mainPanel.add(new JLabel("Saisir le nom du Fighter : "));
+            jtf = new JTextField();
+            mainPanel.add(jtf);
+
+            JButton ok = new JButton("OK");
+            ok.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    String text = DialogNouveauFighter.this.jtf.getText();
+                    if (text.matches("([a-z]|[A-Z])*")) {
+                        System.out.println("Création du nouveau fighter...");
+                        AF_MenuFichier.this.frame.setFighter(new Fighter(text));
+                        DialogNouveauFighter.this.dispose();
+                    } else {
+                        System.out.println("/!\\ Seul les caractères de l'alphabet [a-z] sont acceptés.");
+                    }
+                }
+            });
+
+            JButton annuler = new JButton("Annuler");
+            annuler.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    DialogNouveauFighter.this.dispose();
+                }
+            });
+
+            JPanel container = new JPanel(new GridLayout(1,2));
+
+            container.add(ok);
+            container.add(annuler);
+            mainPanel.add(container);
+
+            this.add(mainPanel);
+
+            this.pack();
+            this.setLocationRelativeTo(null);
+
+            this.setVisible(true);
+
         }
     }
 }

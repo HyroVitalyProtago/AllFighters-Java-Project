@@ -17,22 +17,26 @@ import modele.objects.FSprite;
  */
 public class AF_PanelListOfSprites extends JPanel {
 
-    private Fighter fighter;
+    //private Fighter fighter;
+    private AF_Frame frame;
 
-    public AF_PanelListOfSprites() {
+    public AF_PanelListOfSprites(AF_Frame frame) {
+        this.frame = frame;
+
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createTitledBorder(" Liste des sprites "));
     }
-
+/*
     public AF_PanelListOfSprites(Fighter fighter) {
         this();
         this.fighter = fighter;
         refresh();
     }
-
+*/
     public void refresh() {
-        if (this.fighter == null) return;
-        for (FSprite[] sprites : this.fighter.getSprites()) {
+        Fighter fighter = this.frame.getFighter();
+        if (fighter == null) return;
+        for (FSprite[] sprites : fighter.getSprites()) {
             for (FSprite fSprite : sprites) {
                 this.add(new JLabel(fSprite.getName()));
             }

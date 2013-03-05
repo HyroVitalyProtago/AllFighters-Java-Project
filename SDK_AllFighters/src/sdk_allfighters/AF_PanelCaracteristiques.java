@@ -4,16 +4,9 @@
  */
 package sdk_allfighters;
 
-import com.apple.laf.AquaBorder;
-import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicBorders;
+import java.text.NumberFormat;
+import javax.swing.*;
 import modele.fighters.Fighter;
 
 /**
@@ -22,11 +15,14 @@ import modele.fighters.Fighter;
  */
 public class AF_PanelCaracteristiques extends JPanel {
 
-    private Fighter fighter;
+    //private Fighter fighter;
+    private AF_Frame frame;
     //
-    private JTextField jtf_name, jtf_speed, jtf_jump_force, jtf_life, jtf_power, jtf_force, jtf_resistance;
+    private JTextField jtf_name;
+    private JFormattedTextField jtf_speed, jtf_jump_force, jtf_life, jtf_power, jtf_force, jtf_resistance;
 
-    public AF_PanelCaracteristiques() {
+    public AF_PanelCaracteristiques(AF_Frame frame) {
+        this.frame = frame;
 
         this.setLayout(new GridLayout(7,2));
 
@@ -34,22 +30,22 @@ public class AF_PanelCaracteristiques extends JPanel {
         jtf_name = new JTextField();
 
         JLabel speed = new JLabel("Speed : ");
-        jtf_speed = new JTextField();
+        jtf_speed = new JFormattedTextField(NumberFormat.getIntegerInstance());
 
         JLabel jump_force = new JLabel("Jump force : ");
-        jtf_jump_force = new JTextField();
+        jtf_jump_force = new JFormattedTextField(NumberFormat.getIntegerInstance());
 
         JLabel life = new JLabel("Life : ");
-        jtf_life = new JTextField();
+        jtf_life = new JFormattedTextField(NumberFormat.getIntegerInstance());
 
         JLabel power = new JLabel("Power : ");
-        jtf_power = new JTextField();
+        jtf_power = new JFormattedTextField(NumberFormat.getIntegerInstance());
 
         JLabel force = new JLabel("Force : ");
-        jtf_force = new JTextField();
+        jtf_force = new JFormattedTextField(NumberFormat.getIntegerInstance());
 
         JLabel resistance = new JLabel("Resistance : ");
-        jtf_resistance = new JTextField();
+        jtf_resistance = new JFormattedTextField(NumberFormat.getIntegerInstance());
 
         this.add(name);
         this.add(jtf_name);
@@ -75,24 +71,25 @@ public class AF_PanelCaracteristiques extends JPanel {
         //this.setBorder(new EmptyBorder(5,10,5,5));
         this.setBorder(BorderFactory.createTitledBorder(" Caractéristiques "));
     }
-
+/*
     public AF_PanelCaracteristiques(Fighter fighter) {
         this();
         this.fighter = fighter;
         refresh();
     }
-
+*/
 
 
     public void refresh() {
-        if (this.fighter == null) return;
-        jtf_name.setText(this.fighter.getName());
-        jtf_speed.setText(""+this.fighter.getSPEED());
-        jtf_jump_force.setText(""+this.fighter.getJUMP_FORCE());
-        jtf_life.setText(""+this.fighter.getLife());
-        jtf_power.setText(""+this.fighter.getPower());
-        jtf_force.setText(""+this.fighter.getForce());
-        jtf_resistance.setText(""+this.fighter.getResistance());
+        Fighter fighter = this.frame.getFighter();
+        if (fighter == null) return;
+        jtf_name.setText(fighter.getName());
+        jtf_speed.setText(""+fighter.getSPEED());
+        jtf_jump_force.setText(""+fighter.getJUMP_FORCE());
+        jtf_life.setText(""+fighter.getLife());
+        jtf_power.setText(""+fighter.getPower());
+        jtf_force.setText(""+fighter.getForce());
+        jtf_resistance.setText(""+fighter.getResistance());
     }
 
 }
