@@ -7,6 +7,8 @@ package sdk_allfighters;
 import java.awt.GridLayout;
 import java.text.NumberFormat;
 import javax.swing.*;
+import javax.swing.text.Keymap;
+import javax.swing.text.MaskFormatter;
 import modele.fighters.Fighter;
 
 /**

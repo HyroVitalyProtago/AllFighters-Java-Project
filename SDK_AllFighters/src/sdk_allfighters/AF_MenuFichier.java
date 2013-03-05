@@ -185,12 +185,16 @@ public class AF_MenuFichier extends JMenu {
                                 }
 
                                 try {
-                                    //System.out.println(fighter);
-                                    //System.out.println(path);
                                     new XStreamer_Fighter().save(fighter, path);
                                 } catch (IOException ex) {
                                     Logger.getLogger(AF_MenuFichier.class.getName()).log(Level.SEVERE, null, ex);
                                 }
+                            }
+                        } else {
+                            try {
+                                new XStreamer_Fighter().save(fighter, path);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AF_MenuFichier.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     } else {

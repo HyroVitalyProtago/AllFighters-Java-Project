@@ -59,7 +59,7 @@ public class AF_Frame extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent ke) {
-                throw new UnsupportedOperationException("Not supported yet.");
+                //throw new UnsupportedOperationException("Not supported yet.");
                 /*
                  * if (AF_Frame.this.getImage() != null) { if (ke.getKeyCode()
                  * == KeyEvent.VK_RIGHT) { num++; //System.out.println(num);
@@ -96,10 +96,12 @@ public class AF_Frame extends JFrame {
     private AF_PanelCaracteristiques caracteristiques;
     private AF_PanelListOfSprites listOfSprite;
 
+    private JPanel mainPanel;
+
     public void construire() {
         this.menuBar = new AF_MenuBar(this);
 
-        JPanel mainPanel = new JPanel(new GridLayout(1, 2));
+        mainPanel = new JPanel(new GridLayout(1, 2));
 
         caracteristiques = new AF_PanelCaracteristiques(this);
 
@@ -187,11 +189,15 @@ public class AF_Frame extends JFrame {
 
         this.setJMenuBar(this.menuBar);
         mainPanel.add(this.panel);
+
+        mainPanel.setVisible(false);
+
         this.add(mainPanel);
     }
 
     public void setFighter(Fighter fighter) {
         this.fighter = fighter;
+        if (!mainPanel.isVisible()) mainPanel.setVisible(true);
         caracteristiques.refresh();
         listOfSprite.refresh();
     }
