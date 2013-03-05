@@ -8,10 +8,12 @@ import com.sun.java.swing.plaf.windows.WindowsBorders;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import modele.objects.FImage;
 
 /**
@@ -30,6 +32,10 @@ public class AF_Panel extends JScrollPane {
         //this.add(panel);
 
         this.setViewportView(panel);
+
+        this.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(8,5,3,5), new LineBorder(Color.LIGHT_GRAY)));
+
+        this.setBackground(new Color(236, 236, 236));
 
         //this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
