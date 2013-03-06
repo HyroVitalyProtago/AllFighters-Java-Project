@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sdk_allfighters;
+package sdk_allfighters.fighter;
 
 import development.XStreamer_Fighter;
 import java.awt.GridLayout;
@@ -113,8 +113,8 @@ public class AF_MenuFichier extends JMenu {
                          *
                          */
 
-                        AF_MenuFichier.this.frame.setFighter(new XStreamer_Fighter().load(file.getAbsolutePath()));
-                        enregistrer.setEnabled(true);
+                        AF_MenuFichier.this.frame.charger(file.getAbsolutePath());
+                        //enregistrer.setEnabled(true);
 
                     } else {
                         System.out.println("Open command cancelled by user.");
@@ -139,6 +139,9 @@ public class AF_MenuFichier extends JMenu {
                     //}
                     Fighter fighter = AF_MenuFichier.this.frame.getFighter();
                     String path = AF_MenuFichier.this.frame.getPath();
+
+                    //System.out.println(path);
+
                     if (fighter != null) {
                         if (path == null) {
                             JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
@@ -184,18 +187,11 @@ public class AF_MenuFichier extends JMenu {
                                     }
                                 }
 
-                                try {
-                                    new XStreamer_Fighter().save(fighter, path);
-                                } catch (IOException ex) {
-                                    Logger.getLogger(AF_MenuFichier.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                AF_MenuFichier.this.frame.setPath(path);
+                                AF_MenuFichier.this.frame.enregistrer();
                             }
                         } else {
-                            try {
-                                new XStreamer_Fighter().save(fighter, path);
-                            } catch (IOException ex) {
-                                Logger.getLogger(AF_MenuFichier.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            AF_MenuFichier.this.frame.enregistrer();
                         }
                     } else {
                         System.out.println("Impossible de sauvegarder un fighter NULL");
@@ -232,7 +228,7 @@ public class AF_MenuFichier extends JMenu {
                     if (text.matches("([a-z]|[A-Z])*")) {
                         System.out.println("Création du nouveau fighter...");
                         AF_MenuFichier.this.frame.setFighter(new Fighter(text));
-                        AF_MenuFichier.this.enregistrer.setEnabled(true);
+                        //AF_MenuFichier.this.enregistrer.setEnabled(true);
                         DialogNouveauFighter.this.dispose();
                     } else {
                         System.out.println("/!\\ Seul les caractères de l'alphabet [a-z] sont acceptés.");
@@ -264,5 +260,9 @@ public class AF_MenuFichier extends JMenu {
             this.setVisible(true);
 
         }
+    }
+
+    public JMenuItem getEnregistrer() {
+        return enregistrer;
     }
 }

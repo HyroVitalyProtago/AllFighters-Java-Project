@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sdk_allfighters;
+package sdk_allfighters.fighter;
 
 import development.XStreamer_Fighter;
 import java.awt.GridLayout;
@@ -36,9 +36,9 @@ public class AF_Frame extends JFrame {
     private Point p1;
     //
     //private boolean enregistrable;
-    private String path = null;
+    private String path;
     //
-    private String location = "../SpriteAllFighters/TakeshiYamamoto/";
+    //private String location = "../SpriteAllFighters/TakeshiYamamoto/";
     //private int num = 1;
 
     public AF_Frame() throws HeadlessException {
@@ -48,6 +48,7 @@ public class AF_Frame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+        this.path = null;
         //this.enregistrable = false;
 
         this.addKeyListener(new KeyListener() {
@@ -100,15 +101,19 @@ public class AF_Frame extends JFrame {
 
     public void construire() {
         this.menuBar = new AF_MenuBar(this);
+        this.setJMenuBar(this.menuBar);
+    }
+
+    public void refresh() {
+        if (mainPanel != null)
+            this.remove(mainPanel);
 
         mainPanel = new JPanel(new GridLayout(1, 2));
 
-        caracteristiques = new AF_PanelCaracteristiques(this);
-
-        listOfSprite = new AF_PanelListOfSprites(this);
-
         JPanel container = new JPanel(new GridLayout(2, 1));
+        caracteristiques = new AF_PanelCaracteristiques(this);
         container.add(caracteristiques);
+        listOfSprite = new AF_PanelListOfSprites(this);
         container.add(listOfSprite);
 
         mainPanel.add(container);
@@ -187,19 +192,21 @@ public class AF_Frame extends JFrame {
             }
         });
 
-        this.setJMenuBar(this.menuBar);
         mainPanel.add(this.panel);
 
-        mainPanel.setVisible(false);
+        mainPanel.setVisible(true);
 
         this.add(mainPanel);
     }
 
     public void setFighter(Fighter fighter) {
         this.fighter = fighter;
-        if (!mainPanel.isVisible()) mainPanel.setVisible(true);
+        this.refresh();
+        this.menuBar.getMenuFichier().getEnregistrer().setEnabled(true);
+        //if (!mainPanel.isVisible()) mainPanel.setVisible(true);
         caracteristiques.refresh();
         listOfSprite.refresh();
+        this.setVisible(true);
     }
 
     public Fighter getFighter() {
@@ -211,7 +218,7 @@ public class AF_Frame extends JFrame {
     }
 
     public String getPath() {
-        return path;
+        return this.path;
     }
 
     public void enregistrer() {
@@ -225,7 +232,11 @@ public class AF_Frame extends JFrame {
     }
 
     public void charger(String path) {
-        this.fighter = new XStreamer_Fighter().load(path);
+        Fighter f = new XStreamer_Fighter().load(path);
+        if (f != null) {
+            this.setPath(path);
+            this.setFighter(f);
+        }
     }
 
     // ******************************** ANCIENNE VERSION ********************************
