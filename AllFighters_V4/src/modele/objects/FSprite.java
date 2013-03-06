@@ -61,6 +61,9 @@ public class FSprite extends Rectangle implements Serializable {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+    public void setSpeed(String speed) {
+        this.speed = Integer.parseInt(speed);
+    }
 
     public void next() {
         int taille = this.subImages.size();
@@ -262,5 +265,9 @@ public class FSprite extends Rectangle implements Serializable {
     public String getName() {
         return name;
     }
-    
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
