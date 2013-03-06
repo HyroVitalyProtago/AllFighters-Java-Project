@@ -7,8 +7,6 @@ package sdk_allfighters.fighter;
 import development.XStreamer_Fighter;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,9 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import modele.fighters.Fighter;
-import modele.objects.Box;
-import modele.objects.Box_Type;
-import modele.objects.FImage;
+import modele.objects.FSprite;
 
 /**
  *
@@ -26,14 +22,15 @@ import modele.objects.FImage;
  */
 public class AF_Frame extends JFrame {
 
-    private FImage image;
+    //private FImage image;
     //
     private Fighter fighter;
     //
     private AF_MenuBar menuBar;
     private AF_Panel panel;
     //
-    private Point p1;
+    private FSprite currentSprite;
+    //private Point p1;
     //
     //private boolean enregistrable;
     private String path;
@@ -49,6 +46,7 @@ public class AF_Frame extends JFrame {
         this.setLocationRelativeTo(null);
 
         this.path = null;
+        this.currentSprite = null;
         //this.enregistrable = false;
 
         this.addKeyListener(new KeyListener() {
@@ -130,12 +128,13 @@ public class AF_Frame extends JFrame {
             @Override
             public void mousePressed(MouseEvent me) {
                 //System.out.println("MousePressed : "+me.getPoint());
-                AF_Frame.this.p1 = me.getPoint();
+                //AF_Frame.this.p1 = me.getPoint();
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
                 //System.out.println("MouseReleased : "+me.getPoint());
+                /*
                 Point p2 = me.getPoint();
 
                 Rectangle rect = new Rectangle();
@@ -165,6 +164,8 @@ public class AF_Frame extends JFrame {
                 System.out.println("image.addBox(new Box(Box_Type.HITTABLE, new Rectangle(" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ")))");
                 AF_Frame.this.image.addBox(new Box(Box_Type.HITTABLE, rect));
                 AF_Frame.this.panel.repaint();
+                *
+                */
             }
 
             @Override
@@ -219,6 +220,14 @@ public class AF_Frame extends JFrame {
 
     public String getPath() {
         return this.path;
+    }
+
+    public FSprite getCurrentSprite() {
+        return currentSprite;
+    }
+
+    public void setCurrentSprite(FSprite currentSprite) {
+        this.currentSprite = currentSprite;
     }
 
     public void enregistrer() {

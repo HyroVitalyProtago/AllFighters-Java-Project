@@ -31,10 +31,10 @@ public class CaracteristiqueFactory {
         return instance;
     }
 
-    public MyJTextField<String> StringCaracteristique(JPanel container, Fighter fighter, String name, Method methodForChangeFighter, Method methodRefresh, String matchesOnCaretEvent) {
+    public MyJTextField<String> StringCaracteristique(JPanel container, Object obj, String name, Method methodForChangeFighter, Method methodRefresh, String matchesOnCaretEvent) {
         JLabel label = new JLabel(name + " : ");
-        MyJTextField<String> jtf = new MyJTextField<String>(fighter, methodRefresh);
-        CaretListener cl = new MyCaretListener<String>(jtf, fighter,methodForChangeFighter, matchesOnCaretEvent);
+        MyJTextField<String> jtf = new MyJTextField<String>(obj, methodRefresh);
+        CaretListener cl = new MyCaretListener<String>(jtf, obj,methodForChangeFighter, matchesOnCaretEvent);
         jtf.addCaretListener(cl);
         container.add(label);
         container.add(jtf);
@@ -42,10 +42,10 @@ public class CaracteristiqueFactory {
         return jtf;
     }
 
-    public MyJTextField<Integer> IntegerCaracteristique(JPanel container, Fighter fighter, String name, Method methodForChangeFighter, Method methodRefresh, String matchesOnCaretEvent) {
+    public MyJTextField<Integer> IntegerCaracteristique(JPanel container, Object obj, String name, Method methodForChangeFighter, Method methodRefresh, String matchesOnCaretEvent) {
         JLabel label = new JLabel(name + " : ");
-        MyJTextField<Integer> jtf = new MyJTextField<Integer>(fighter, methodRefresh);
-        CaretListener cl = new MyCaretListener<Integer>(jtf, fighter,methodForChangeFighter, matchesOnCaretEvent);
+        MyJTextField<Integer> jtf = new MyJTextField<Integer>(obj, methodRefresh);
+        CaretListener cl = new MyCaretListener<Integer>(jtf, obj,methodForChangeFighter, matchesOnCaretEvent);
         jtf.addCaretListener(cl);
         container.add(label);
         container.add(jtf);
@@ -56,13 +56,13 @@ public class CaracteristiqueFactory {
     class MyCaretListener<E> implements CaretListener {
 
         private JTextField jtf;
-        private Fighter fighter;
+        private Object obj;
         private Method methodForChangeFighter;
         private String matchesOnCaretEvent;
 
-        public MyCaretListener(JTextField jtf, Fighter fighter, Method methodForChangeFighter, String matchesOnCaretEvent) {
+        public MyCaretListener(JTextField jtf, Object obj, Method methodForChangeFighter, String matchesOnCaretEvent) {
             this.jtf = jtf;
-            this.fighter = fighter;
+            this.obj = obj;
 
             if (!methodExist(Fighter.class, methodForChangeFighter)) throw new IllegalArgumentException("La méthode demandée n'existe pas...");
 
@@ -85,7 +85,7 @@ public class CaracteristiqueFactory {
 
             if (!text.equals("") && text.matches(this.matchesOnCaretEvent)) {
                 try {
-                    methodForChangeFighter.invoke(fighter, text);
+                    methodForChangeFighter.invoke(obj, text);
                 } catch (IllegalAccessException ex) {
                     Logger.getLogger(CaracteristiqueFactory.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalArgumentException ex) {

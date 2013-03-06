@@ -7,10 +7,8 @@ package sdk_allfighters.fighter;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicBorders;
 import modele.fighters.Fighter;
 import modele.objects.FSprite;
 
@@ -41,15 +39,36 @@ public class AF_PanelListOfSprites extends JPanel {
 
         ImageIcon ii = new ImageIcon("./ressources/add.png");
         JButton add = new JButton("Ajouter", ii);
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Fighter fighter = AF_PanelListOfSprites.this.frame.getFighter();
+                if (fighter != null) {
+
+                }
+            }
+        });
         toolBar.add(add);
 
         ImageIcon ii2 = new ImageIcon("./ressources/edit.png");
         JButton edit = new JButton("Éditer", ii2);
+        edit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+            }
+        });
         edit.setEnabled(false);
         toolBar.add(edit);
 
         ImageIcon ii3 = new ImageIcon("./ressources/remove.png");
         JButton remove = new JButton("Supprimer", ii3);
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+            }
+        });
         remove.setEnabled(false);
         toolBar.add(remove);
 

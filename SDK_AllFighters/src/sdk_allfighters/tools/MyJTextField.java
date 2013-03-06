@@ -17,17 +17,17 @@ import modele.fighters.Fighter;
  */
 public class MyJTextField<E> extends JFormattedTextField {
 
-    private Fighter fighter;
+    private Object obj;
     private Method refresh;
 
-    public MyJTextField(Fighter fighter, Method refresh) {
-        this.fighter = fighter;
+    public MyJTextField(Object obj, Method refresh) {
+        this.obj = obj;
         this.refresh = refresh;
     }
 
     public void refresh() {
         try {
-            Object obj = refresh.invoke(fighter, null);
+            Object obj = refresh.invoke(this.obj, null);
             this.setText(((E)obj).toString());
         } catch (IllegalAccessException ex) {
             Logger.getLogger(MyJTextField.class.getName()).log(Level.SEVERE, null, ex);

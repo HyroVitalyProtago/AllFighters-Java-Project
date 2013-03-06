@@ -5,7 +5,9 @@
 package sdk_allfighters.fighter;
 
 import development.XStreamer_Fighter;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modele.fighters.Fighter;
+import modele.objects.FSprite;
+import sdk_allfighters.sprite.AF_Sprite_Frame;
 
 /**
  *
@@ -32,6 +36,7 @@ public class AF_MenuFichier extends JMenu {
     public AF_MenuFichier(AF_Frame frame) {
         super("Fichier");
         this.add(new NouveauFighter());
+        this.add(new NouveauSprite());
         this.add(new Ouvrir());
         enregistrer = new Enregistrer();
         enregistrer.setEnabled(false);
@@ -43,7 +48,7 @@ public class AF_MenuFichier extends JMenu {
 
         public NouveauFighter() {
             super("Nouveau Fighter");
-            this.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+            //this.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             this.addActionListener(new ActionListener() {
 
                 @Override
@@ -71,6 +76,44 @@ public class AF_MenuFichier extends JMenu {
                     //AF_MenuFichier.this.frame.setFighter(new Fighter());
 
                     JDialog dialog = new DialogNouveauFighter();
+
+                }
+            });
+        }
+    }
+
+    public class NouveauSprite extends JMenuItem {
+
+        public NouveauSprite() {
+            super("Nouveau Sprite");
+            this.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+            this.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    //throw new UnsupportedOperationException("Not supported yet.");
+
+                    System.out.println("Nouveau Sprite");
+
+                    /*
+                     * JDialog dialog = new JDialog(AF_MenuFichier.this.frame,
+                     * "Nouveau Fighter", true); dialog.add(new JLabel("Saisir
+                     * le nom du Fighter : ")); JTextField jtf = new
+                     * JTextField(); dialog.add(jtf); dialog.setVisible(true);
+                     */
+
+                    //Custom button text
+                    /*
+                     * Object[] options = {"OK", "Annuler"}; int n =
+                     * JOptionPane.showOptionDialog(frame, "Saisir le nom du
+                     * Fighter : ", "Nouveau Fighter",
+                     * JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                     * null, options, options[0]);
+                     *
+                     */
+                    //AF_MenuFichier.this.frame.setFighter(new Fighter());
+
+                    JDialog dialog = new DialogNouveauSprite();
 
                 }
             });
@@ -242,6 +285,71 @@ public class AF_MenuFichier extends JMenu {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     DialogNouveauFighter.this.dispose();
+                }
+            });
+
+            JPanel container = new JPanel(new GridLayout(1, 2));
+
+            container.add(ok);
+            container.add(annuler);
+            mainPanel.add(container);
+
+            this.add(mainPanel);
+
+            this.pack();
+            //this.setSize(300, 200);
+            this.setLocationRelativeTo(null);
+
+            this.setVisible(true);
+
+        }
+    }
+
+    class DialogNouveauSprite extends JDialog {
+
+        private JTextField jtf;
+
+        public DialogNouveauSprite() {
+
+            JPanel mainPanel = new JPanel(new GridLayout(3, 1));
+            mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+            this.setTitle("Nouveau Sprite");
+            this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            this.setResizable(false);
+            this.setModal(true);
+
+            mainPanel.add(new JLabel("Saisir le nom du Sprite : "));
+            jtf = new JTextField();
+            mainPanel.add(jtf);
+
+            JButton ok = new JButton("OK");
+            ok.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    String text = DialogNouveauSprite.this.jtf.getText();
+                    if (text.matches("([a-z]|[A-Z])*")) {
+                        System.out.println("Création du nouveau sprite...");
+
+                        JFrame f = new AF_Sprite_Frame(new FSprite(text, new Point(0,0), new Dimension(0,0), 0));
+                        f.setVisible(true);
+
+                        //AF_MenuFichier.this.frame.setFighter(new Fighter(text));
+                        //AF_MenuFichier.this.enregistrer.setEnabled(true);
+                        DialogNouveauSprite.this.dispose();
+                    } else {
+                        System.out.println("/!\\ Seul les caractères de l'alphabet [a-z] sont acceptés.");
+                    }
+                }
+            });
+
+            JButton annuler = new JButton("Annuler");
+            annuler.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    DialogNouveauSprite.this.dispose();
                 }
             });
 
