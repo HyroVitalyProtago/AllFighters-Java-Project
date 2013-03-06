@@ -64,11 +64,9 @@ public class Fighter extends FObject implements Serializable {
 
         this.map = new EnumMap<Fighter_State, FSprite[]>(Fighter_State.class);
     }
-
     public Fighter(String name, ArrayList<FSprite> sprites) {
         super(name, sprites);
     }
-
     public Fighter(String name, ArrayList<FSprite> sprites, boolean visible, boolean solid) {
         super(name, sprites, visible, solid);
     }
@@ -79,12 +77,10 @@ public class Fighter extends FObject implements Serializable {
         }
         this.map.put(state, sprites);
     }
-
     @Override
     public void addSprite(FSprite sprite) {
         throw new UnsupportedOperationException();
     }
-
     public Collection<FSprite[]> getSprites() {
         return this.map.values();
     }
@@ -92,7 +88,6 @@ public class Fighter extends FObject implements Serializable {
     public Fighter_State getEnchainement() {
         return enchainement;
     }
-
     public void setEnchainement(Fighter_State enchainement) {
         this.enchainement = enchainement;
     }
@@ -118,21 +113,12 @@ public class Fighter extends FObject implements Serializable {
     public boolean isOnGround() {
         return onGround;
     }
-
     public void setOnGround(boolean onGround) {
         if (!this.onGround && onGround) {
             //this.timeOnGroundBetweenJumpAndFall = 0; //remove
             this.setState(Fighter_State.getup);
         }
         this.onGround = onGround;
-    }
-
-    public int getLife() {
-        return life;
-    }
-
-    public int getPower() {
-        return power;
     }
 
     public void update() { // UPDATE COMPORTEMENT
@@ -145,7 +131,6 @@ public class Fighter extends FObject implements Serializable {
     public Direction getDir() {
         return dir;
     }
-
     public void setDir(Direction dir) {
         this.dir = dir;
     }
@@ -157,7 +142,6 @@ public class Fighter extends FObject implements Serializable {
             this.state = state;
         }
     }
-
     public Fighter_State getState() {
         return state;
     }
@@ -223,7 +207,6 @@ public class Fighter extends FObject implements Serializable {
             this.setVelocityX(SPEED);
         }
     }
-
     public void move(Direction dir, double speed) {
         if (dir == Direction.LEFT) {
             this.setVelocityX(-speed);
@@ -261,7 +244,6 @@ public class Fighter extends FObject implements Serializable {
         f.setDir(this.dir.inverse());
         f.recevoirDegats(this.force);
     }
-
     public void recevoirDegats(int degats) {
         if ((degats - resistance) > 0) {
             this.life -= (degats - resistance);
@@ -271,24 +253,68 @@ public class Fighter extends FObject implements Serializable {
         }
     }
 
-    //
-
-    public int getForce() {
-        return force;
+    // ******************************** GETTERS AND SETTERS ********************************
+    // -- LIFE --
+    public int getLife() {
+        return life;
     }
-
+    public void setLife(int life) {
+        this.life = life;
+    }
+    public void setLife(String life) {
+        this.life = Integer.parseInt(life);
+    }
+    // -- POWER --
+    public int getPower() {
+        return power;
+    }
+    public void setPower(int power) {
+        this.power = power;
+    }
+    public void setPower(String power) {
+        this.power = Integer.parseInt(power);
+    }
+    // -- JUMP_FORCE --
     public int getJUMP_FORCE() {
         return JUMP_FORCE;
     }
-
-    public int getResistance() {
-        return resistance;
+    public void setJUMP_FORCE(int JUMP_FORCE) {
+        this.JUMP_FORCE = JUMP_FORCE;
     }
-
+    public void setJUMP_FORCE(String JUMP_FORCE) {
+        this.JUMP_FORCE = Integer.parseInt(JUMP_FORCE);
+    }
+    // -- SPEED --
     public int getSPEED() {
         return SPEED;
     }
-
+    public void setSPEED(int SPEED) {
+        this.SPEED = SPEED;
+    }
+    public void setSPEED(String SPEED) {
+        this.SPEED = Integer.parseInt(SPEED);
+    }
+    // -- FORCE --
+    public int getForce() {
+        return force;
+    }
+    public void setForce(int force) {
+        this.force = force;
+    }
+    public void setForce(String force) {
+        this.force = Integer.parseInt(force);
+    }
+    // -- RESISTANCE --
+    public int getResistance() {
+        return resistance;
+    }
+    public void setResistance(int resistance) {
+        this.resistance = resistance;
+    }
+    public void setResistance(String resistance) {
+        this.resistance = Integer.parseInt(resistance);
+    }
+    // ************************************************************************************************
 
     // SYSTEM MAKE FIGHTER
     public static final int SPEED_SPRITE = 10;
