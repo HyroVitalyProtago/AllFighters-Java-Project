@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import modele.fighters.Fighter;
 
 /**
  *
@@ -31,10 +30,25 @@ public class CaracteristiqueFactory {
         return instance;
     }
 
-    public MyJTextField<String> StringCaracteristique(JPanel container, Object obj, String name, Method methodForChangeFighter, Method methodRefresh, String matchesOnCaretEvent) {
+    /*
+     *
+     * JPanel container, Class c, Object obj, String name, Method methodForChangeObject, Method methodRefresh, String matchesOnCaretEvent
+     *
+     *
+     * container                :       le panel qui va contenir le label et JFormatedField
+     * c                        :       la classe de l'objet sur lequel le champ va être modifié
+     * obj                      :       l'objet qui va être modifié par le champ
+     * methodForChangeObject    :       la méthode qui SET le champ sur l'objet
+     * methodRefresh            :       la méthode qui GET le champ sur l'objet
+     * matchesOnCaretEvent      :       pattern qui est vérifié lors de la modification du Champ (Field)
+     *
+     *
+     */
+
+    public MyJTextField<String> StringCaracteristique(JPanel container, Class c, Object obj, String name, Method methodForChangeObject, Method methodRefresh, String matchesOnCaretEvent) {
         JLabel label = new JLabel(name + " : ");
         MyJTextField<String> jtf = new MyJTextField<String>(obj, methodRefresh);
-        CaretListener cl = new MyCaretListener<String>(jtf, obj,methodForChangeFighter, matchesOnCaretEvent);
+        CaretListener cl = new MyCaretListener<String>(c, jtf, obj,methodForChangeObject, matchesOnCaretEvent);
         jtf.addCaretListener(cl);
         container.add(label);
         container.add(jtf);
@@ -42,10 +56,10 @@ public class CaracteristiqueFactory {
         return jtf;
     }
 
-    public MyJTextField<Integer> IntegerCaracteristique(JPanel container, Object obj, String name, Method methodForChangeFighter, Method methodRefresh, String matchesOnCaretEvent) {
+    public MyJTextField<Integer> IntegerCaracteristique(JPanel container, Class c, Object obj, String name, Method methodForChangeObject, Method methodRefresh, String matchesOnCaretEvent) {
         JLabel label = new JLabel(name + " : ");
         MyJTextField<Integer> jtf = new MyJTextField<Integer>(obj, methodRefresh);
-        CaretListener cl = new MyCaretListener<Integer>(jtf, obj,methodForChangeFighter, matchesOnCaretEvent);
+        CaretListener cl = new MyCaretListener<Integer>(c, jtf, obj,methodForChangeObject, matchesOnCaretEvent);
         jtf.addCaretListener(cl);
         container.add(label);
         container.add(jtf);
@@ -60,11 +74,11 @@ public class CaracteristiqueFactory {
         private Method methodForChangeFighter;
         private String matchesOnCaretEvent;
 
-        public MyCaretListener(JTextField jtf, Object obj, Method methodForChangeFighter, String matchesOnCaretEvent) {
+        public MyCaretListener(Class c,JTextField jtf, Object obj, Method methodForChangeFighter, String matchesOnCaretEvent) {
             this.jtf = jtf;
             this.obj = obj;
 
-            if (!methodExist(Fighter.class, methodForChangeFighter)) throw new IllegalArgumentException("La méthode demandée n'existe pas...");
+            if (!methodExist(c, methodForChangeFighter)) throw new IllegalArgumentException("La méthode demandée n'existe pas...");
 
             this.methodForChangeFighter = methodForChangeFighter;
             this.matchesOnCaretEvent = matchesOnCaretEvent;

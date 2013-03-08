@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
-import modele.fighters.Fighter;
 
 /**
  *
@@ -25,6 +24,7 @@ public class MyJTextField<E> extends JFormattedTextField {
         this.refresh = refresh;
     }
 
+    // refresh met à jour le contenu du Champ (Field) avec "Method refresh" sur "Object obj"
     public void refresh() {
         try {
             Object obj = refresh.invoke(this.obj, null);

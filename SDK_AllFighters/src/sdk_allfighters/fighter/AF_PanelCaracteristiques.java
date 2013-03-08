@@ -41,31 +41,31 @@ public class AF_PanelCaracteristiques extends JPanel {
         Fighter fighter = this.frame.getFighter();
         try {
             // -- NAME --
-            textFields.add(CaracteristiqueFactory.getInstance().StringCaracteristique(this, fighter, "Name",
+            textFields.add(CaracteristiqueFactory.getInstance().StringCaracteristique(this, Fighter.class, fighter, "Name",
                     Fighter.class.getMethod("setName", String.class), Fighter.class.getMethod("getName", null), patternName));
 
             // -- SPEED --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, fighter, "Speed",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, Fighter.class, fighter, "Speed",
                     Fighter.class.getMethod("setSPEED", String.class), Fighter.class.getMethod("getSPEED", null), patternInteger));
 
             // -- JUMP_FORCE --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, fighter, "Jump force",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, Fighter.class, fighter, "Jump force",
                     Fighter.class.getMethod("setJUMP_FORCE", String.class), Fighter.class.getMethod("getJUMP_FORCE", null), patternInteger));
 
             // -- LIFE --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, fighter, "Life",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, Fighter.class, fighter, "Life",
                     Fighter.class.getMethod("setLife", String.class), Fighter.class.getMethod("getLife", null), patternInteger));
 
             // -- POWER --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, fighter, "Power",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, Fighter.class, fighter, "Power",
                     Fighter.class.getMethod("setPower", String.class), Fighter.class.getMethod("getPower", null), patternInteger));
 
             // -- FORCE --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, fighter, "Force",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, Fighter.class, fighter, "Force",
                     Fighter.class.getMethod("setForce", String.class), Fighter.class.getMethod("getForce", null), patternInteger));
 
             // -- RESISTANCE --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, fighter, "Resistance",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, Fighter.class, fighter, "Resistance",
                     Fighter.class.getMethod("setResistance", String.class), Fighter.class.getMethod("getResistance", null), patternInteger));
 
         } catch (NoSuchMethodException ex) {

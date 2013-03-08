@@ -35,11 +35,11 @@ public class AF_Sprite_PanelCaracteristiques extends JPanel {
         FSprite sprite = this.frame.getSprite();
         try {
             // -- NAME --
-            textFields.add(CaracteristiqueFactory.getInstance().StringCaracteristique(this, sprite, "Name",
+            textFields.add(CaracteristiqueFactory.getInstance().StringCaracteristique(this, FSprite.class, sprite, "Name",
                     FSprite.class.getMethod("setName", String.class), FSprite.class.getMethod("getName", null), patternName));
 
             // -- SPEED --
-            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, sprite, "Speed",
+            textFields.add(CaracteristiqueFactory.getInstance().IntegerCaracteristique(this, FSprite.class, sprite, "Speed",
                     FSprite.class.getMethod("setSpeed", String.class), FSprite.class.getMethod("getSpeed", null), patternInteger));
 
         } catch (NoSuchMethodException ex) {
