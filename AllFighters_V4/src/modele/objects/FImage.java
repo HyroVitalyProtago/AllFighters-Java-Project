@@ -31,16 +31,19 @@ public class FImage extends Rectangle implements Serializable {
 
         this.boxs = new ArrayList<Box>();
     }
-    public FImage(Point point, String location) throws IOException {        
+    public FImage(Point point, String location) throws IOException {
         this(ImageIO.read(new File(location)), point);
         this.location = location;
     }
     public FImage(int i, int i1, String location) throws IOException {
         this(new Point(i, i1), location);
-    }    
+    }
 
     public void addBox(Box b) {
         this.boxs.add(b);
+    }
+    public ArrayList<Box> getBoxs() {
+        return boxs;
     }
     private void setBoxs(ArrayList<Box> boxs) {
         this.boxs = boxs;
@@ -58,17 +61,17 @@ public class FImage extends Rectangle implements Serializable {
             }
         }
         Point p = new Point(spr.getBounds().width - this.width - this.x, this.y);
-        
+
         ArrayList<Box> boxs = new ArrayList<Box>();
         for (Box box : this.boxs) {
             Box tmp = new Box(box.getType(), box);
             tmp.x = this.width - box.width - box.x;
             boxs.add(tmp);
         }
-        
+
         FImage img = new FImage(bi, p);
         img.setBoxs(boxs);
-        
+
         return img;
     }
     @Override
@@ -77,22 +80,22 @@ public class FImage extends Rectangle implements Serializable {
         img.setBoxs(boxs);
         //img.pointChaud = this.pointChaud;
         return img;
-    }    
-    
+    }
+
     // fight : fonction qui cherche les collision entre les hitboxs de deux images
     // retourne 0 si aucune collsions
     // +1 si l'image "touche"
     public boolean fight(Fighter f,FImage ennemi) {
         boolean result = false;
-        
+
         Box tmp;
-        for (Box box : boxs) {            
+        for (Box box : boxs) {
             tmp = box.clone();
             tmp.x = this.x + tmp.x;
             tmp.y = this.y + tmp.y;
             //System.out.println("Image : box "+box.getType());
             //System.out.println("Image : box_contains = "+box.contains(f));
-            if (tmp.getType() == Box_Type.ATTACKING && !box.contains(f)) {                
+            if (tmp.getType() == Box_Type.ATTACKING && !box.contains(f)) {
                 for (Box box1 : ennemi.boxs) {
                     box1 = box1.clone();
                     box1.x = ennemi.x + box1.x;
@@ -103,17 +106,17 @@ public class FImage extends Rectangle implements Serializable {
                     }
                 }
             }
-        }        
-        
+        }
+
         return result;
     }
-    
+
     public void resetBoxs() {
         for (Box box : boxs) {
             box.resetFighters();
         }
     }
-    
+
     // DRAW
     public void drawBounds(Graphics g) {
         g.setColor(Color.WHITE);
@@ -126,9 +129,9 @@ public class FImage extends Rectangle implements Serializable {
     }
     public void draw(FSprite spr, Graphics g) {
         int y = spr.height - this.y - this.height;
-        
+
         //System.out.println(spr.height+" - "+this.y+" - "+this.height);
-        
+
         g.translate(x, y);
 
         if (AllFighters.SHOW_BOXS_FIGHTER) {
@@ -154,7 +157,7 @@ public class FImage extends Rectangle implements Serializable {
         }
         return s;
     }
-    
-    
-    
+
+
+
 }
