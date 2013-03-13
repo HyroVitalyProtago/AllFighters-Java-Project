@@ -15,7 +15,7 @@ import modele.fighters.Fighter;
  * @author MyMac
  */
 public class Box extends Rectangle {
-    
+
     //public static final int TYPE_HITTABLE_HEAD = 1;
     //public static final int TYPE_HITTABLE_ARMS = 2;
     //public static final int TYPE_HITTABLE_CHEST = 3; //Torse
@@ -26,15 +26,15 @@ public class Box extends Rectangle {
     private Box_Type type;
 
     public Box(Box_Type type, Rectangle rctngl) {
-        super(rctngl);        
+        super(rctngl);
         this.type = type;
         this.fightersTouched = new ArrayList<Fighter>();
     }
 
     public Box_Type getType() {
         return type;
-    }    
-    
+    }
+
     public Color getColor() {
         Color c = null;
         switch(type) {
@@ -50,7 +50,7 @@ public class Box extends Rectangle {
         }
         return c;
     }
-    
+
     public void draw(Graphics g) {
         g.setColor(getColor());
         g.drawRect(x, y, width, height);
@@ -59,20 +59,25 @@ public class Box extends Rectangle {
     public void addFighter(Fighter f) {
         this.fightersTouched.add(f);
     }
-    
-    public boolean contains(Fighter f) {        
+
+    public boolean contains(Fighter f) {
         return this.fightersTouched.contains(f);
     }
-    
+
     public void resetFighters() {
         this.fightersTouched.clear();
     }
-    
+
     @Override
-    public Box clone() {        
+    public Box clone() {
         return new Box(type, new Rectangle(x, y, width, height));
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "["+this.x+", "+this.y+", "+this.width+", "+this.height+"]";
+    }
+
+
+
 }

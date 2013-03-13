@@ -151,11 +151,12 @@ public class FImage extends Rectangle implements Serializable {
 
     @Override
     public String toString() {
-        String s = "";
-        for (Box box : boxs) {
-            s += "Box : "+box.toString();
-        }
-        return s;
+//        String s = "";
+//        for (Box box : boxs) {
+//            s += "Box : "+box.toString();
+//        }
+//        return s;
+        return "["+this.x+", "+this.y+", "+this.width+", "+this.height+"]";
     }
 
 
