@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Hyro Vitaly Protago</string>
+	<key>Buffer Order</key>
+	<array>
+		<string>Action</string>
+		<string>Jump</string>
+		<string>Move</string>
+		<string>Direction</string>
+		<string>Rectangle</string>
+		<string>Box</string>
+		<string>FImage</string>
+		<string>FSprite</string>
+		<string>FObject</string>
+		<string>Comportement</string>
+		<string>FighterController</string>
+		<string>Keyboard</string>
+		<string>Fighter</string>
+		<string>Player</string>
+		<string>Room</string>
+		<string>Game</string>
+		<string>ComportementTakeshiYamamoto</string>
+		<string>MakeTakeshiYamamoto</string>
+		<string>Main</string>
+	</array>
+	<key>Created</key>
+	<string>2013-04-23 19:27:13 +0000</string>
+	<key>Dependencies</key>
+	<array>
+		<string>XML</string>
+		<string>BaseGameEngine</string>
+		<string>FSM</string>
+	</array>
+	<key>Description</key>
+	<string>No description available</string>
+</dict>
+</plist>
